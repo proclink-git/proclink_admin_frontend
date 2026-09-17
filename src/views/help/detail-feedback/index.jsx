@@ -1,14 +1,16 @@
 import React from 'react'
-import { Badge } from 'react-bootstrap'
+import { Badge, Button } from 'react-bootstrap'
 import { useQuery } from '@apollo/client'
+import { FormattedMessage } from 'react-intl'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 
 import { GET_INQUIRY_BY_ID } from 'graph-ql/help/inquiry'
+import PermissionProvider from 'shared/components/permission-provider'
 import { dateCheck } from 'shared/utils'
 import { getInquiryFields, getInquiryTypeLabel, INQUIRY_STATUS_LABELS } from 'shared/constants/inquiry'
 
-function DetailFeedback({ id }) {
+function DetailFeedback({ id, onDelete }) {
   const { data } = useQuery(GET_INQUIRY_BY_ID, {
     variables: { input: { _id: id } },
     skip: !id
@@ -63,10 +65,21 @@ function DetailFeedback({ id }) {
           </a>
         </div>
       )}
+
+      {onDelete && (
+        <PermissionProvider isAllowedTo="VIEW_INQUIRY">
+          <div className="inquiry-detail__actions">
+            <Button variant="outline-danger" onClick={onDelete}>
+              <FormattedMessage id="delete" />
+            </Button>
+          </div>
+        </PermissionProvider>
+      )}
     </div>
   )
 }
 DetailFeedback.propTypes = {
-  id: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
+  onDelete: PropTypes.func
 }
 export default DetailFeedback

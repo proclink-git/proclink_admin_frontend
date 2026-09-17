@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Badge, Button } from 'react-bootstrap'
+import { Badge, Button, Form } from 'react-bootstrap'
 import { FormattedMessage } from 'react-intl'
 import moment from 'moment'
 
@@ -10,7 +10,7 @@ import PopUpModal from '../pop-up-modal'
 import DetailFeedback from 'views/help/detail-feedback'
 import { dateCheck } from 'shared/utils'
 
-function FeedbackItemRow({ feedback, columns = [] }) {
+function FeedbackItemRow({ feedback, columns = [], index, selectedFeedback, bulkPermission, onDelete, onSelect }) {
   const [view, setView] = useState(false)
   const [eStatus, setEStatus] = useState('ur')
 
@@ -92,26 +92,48 @@ function FeedbackItemRow({ feedback, columns = [] }) {
 
   const renderAction = () => (
     <td className="text-end">
-      <PermissionProvider isAllowedTo="VIEW_INQUIRY">
-        <ToolTip toolTipMessage={<FormattedMessage id="view" />}>
-          <Button
-            variant="link"
-            className="square icon-btn"
-            onClick={() => {
-              setEStatus('r')
-              setView(true)
-            }}
-          >
-            <i className="icon-visibility d-block" />
-          </Button>
-        </ToolTip>
-      </PermissionProvider>
+      <div className="d-flex justify-content-end">
+        <PermissionProvider isAllowedTo="VIEW_INQUIRY">
+          <ToolTip toolTipMessage={<FormattedMessage id="view" />}>
+            <Button
+              variant="link"
+              className="square icon-btn"
+              onClick={() => {
+                setEStatus('r')
+                setView(true)
+              }}
+            >
+              <i className="icon-visibility d-block" />
+            </Button>
+          </ToolTip>
+        </PermissionProvider>
+        <PermissionProvider isAllowedTo="VIEW_INQUIRY">
+          <ToolTip toolTipMessage={<FormattedMessage id="delete" />}>
+            <Button variant="link" className="square icon-btn" onClick={() => onDelete?.(feedback._id)}>
+              <i className="icon-delete d-block" />
+            </Button>
+          </ToolTip>
+        </PermissionProvider>
+      </div>
     </td>
   )
 
   return (
     <>
       <tr key={feedback._id}>
+        <PermissionProvider isAllowedTo={bulkPermission} isArray>
+          <td>
+            <Form.Check
+              type="checkbox"
+              id={selectedFeedback[index]?._id}
+              name={selectedFeedback[index]?._id}
+              checked={selectedFeedback[index]?.value || false}
+              className="form-check m-0"
+              onChange={onSelect}
+              label="&nbsp;"
+            />
+          </td>
+        </PermissionProvider>
         {columns.map((field) => {
           if (field.isPrimary) return renderPrimaryCell(field)
           return <td key={field.internalName}>{renderSimpleValue(field)}</td>
@@ -127,7 +149,7 @@ function FeedbackItemRow({ feedback, columns = [] }) {
         }}
         isCentered
       >
-        <DetailFeedback id={feedback._id} />
+        <DetailFeedback id={feedback._id} onDelete={() => onDelete?.(feedback._id, () => setView(false))} />
       </PopUpModal>
     </>
   )

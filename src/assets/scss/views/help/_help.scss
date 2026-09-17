@@ -221,6 +221,12 @@
     margin-top: 12px;
   }
 
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+
   @include media-max(md) {
     &__summary {
       grid-template-columns: 1fr;

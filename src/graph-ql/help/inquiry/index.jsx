@@ -9,6 +9,7 @@ query ListInquiry($input: ListInquiryInput!) {
       sFullName
       sEmail
       sCompanyName
+      sJobTitle
       sCountry
       eHeaderCategoryType
       sUrl
@@ -29,6 +30,7 @@ query GetInquiryById($input: GetInquiryById) {
     sFullName
     sEmail
     sCompanyName
+    sJobTitle
     sCountry
     eHeaderCategoryType
     sUrl
@@ -38,4 +40,20 @@ query GetInquiryById($input: GetInquiryById) {
     dUpdated
   }
 }
+`
+
+export const DELETE_INQUIRY = gql`
+  mutation DeleteInquiry($input: deleteInquiry) {
+    deleteInquiry(input: $input) {
+      sMessage
+    }
+  }
+`
+
+export const BULK_INQUIRY_DELETE = gql`
+  mutation BulkInquiryDelete($input: bulkInquiryActionInput) {
+    bulkInquiryDelete(input: $input) {
+      sMessage
+    }
+  }
 `

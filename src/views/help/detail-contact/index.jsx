@@ -1,11 +1,12 @@
 import React from 'react'
-import { Form, Row, Col } from 'react-bootstrap'
+import { Button, Form, Row, Col } from 'react-bootstrap'
 import { useQuery } from '@apollo/client'
 import { FormattedMessage } from 'react-intl'
 import PropTypes from 'prop-types'
 
 import { GET_CONTACT_BY_ID } from 'graph-ql/help/contacts'
-function DetailContact({ id }) {
+import PermissionProvider from 'shared/components/permission-provider'
+function DetailContact({ id, onDelete }) {
   const { data } = useQuery(GET_CONTACT_BY_ID, {
     variables: { input: { _id: id } },
     skip: !id
@@ -67,12 +68,22 @@ function DetailContact({ id }) {
           </Form.Group>
         </Col>
       </Row>
+      {onDelete && (
+        <PermissionProvider isAllowedTo="DELETE_CONTACT">
+          <div className="inquiry-detail__actions">
+            <Button variant="outline-danger" onClick={onDelete}>
+              <FormattedMessage id="delete" />
+            </Button>
+          </div>
+        </PermissionProvider>
+      )}
     </>
   )
 }
 
 DetailContact.propTypes = {
-  id: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
+  onDelete: PropTypes.func
 }
 
 export default DetailContact

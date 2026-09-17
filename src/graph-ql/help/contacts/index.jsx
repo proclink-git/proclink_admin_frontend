@@ -15,6 +15,7 @@ export const GET_CONTACTS_LIST = gql`
       dCreated
       dUpdated
       eStatus
+      bMarketingOpt
       sUrl
     }
   }
@@ -34,6 +35,7 @@ query GetContactById($input: getContactById) {
     dCreated
     dUpdated
     eStatus
+    bMarketingOpt
     sUrl
   }
 }
@@ -42,6 +44,14 @@ query GetContactById($input: getContactById) {
 export const DELETE_CONTACT = gql`
   mutation DeleteContact($input: deleteContact) {
     deleteContact(input: $input) {
+      sMessage
+    }
+  }
+`
+
+export const BULK_CONTACT_DELETE = gql`
+  mutation BulkContactDelete($input: bulkContactActionInput) {
+    bulkContactDelete(input: $input) {
       sMessage
     }
   }

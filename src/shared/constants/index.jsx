@@ -207,6 +207,18 @@ export const FEEDBACK_CONTACT_STATUS = [
   { label: <FormattedMessage id="unread" />, value: 'ur' }
 ]
 
+export const ACTIVE_LEAD_STATES = ['r', 'ur']
+
+export function getActiveLeadStates(value, fallback = ACTIVE_LEAD_STATES) {
+  const raw = (Array.isArray(value) ? value : value ? [value] : []).filter(Boolean)
+  const states = raw.filter((state) => ACTIVE_LEAD_STATES.includes(state))
+  return states.length ? states : [...fallback]
+}
+
+export function excludeDeletedLeads(results = []) {
+  return results.filter((item) => item?.eStatus !== 'd')
+}
+
 // export const USER_CUSTOM_FILTER = [
 //   <FormattedMessage id="customRole" />,
 //   <FormattedMessage id="verifiedUsers" />,
