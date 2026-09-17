@@ -1,0 +1,28 @@
+.login-form {
+  margin: 35px 0 25px 0;
+  .title-b {
+    margin-bottom: 20px;
+    .title {
+      font-size: $fs-20;
+      color: $primary-300;
+      font-weight: $fw-700;
+    }
+    p{
+      font-size: $fs-14;
+      color: var(--secondary-400);
+      line-height: 1.45;
+    }
+  }
+  @include media-max(md) {
+    margin: 20px 0 15px 0;
+    .title-b {
+      margin-bottom: 10px;
+    }
+  }
+}
+.b-link {
+  font-size: $fs-14;
+  color: var(--secondary-200);
+  text-transform: uppercase;
+  font-weight: $fw-600;
+}

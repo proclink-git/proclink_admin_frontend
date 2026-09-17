@@ -1,0 +1,91 @@
+{
+    "name": "proclink-admin",
+    "version": "0.1.1",
+    "private": true,
+    "homepage": "/",
+    "dependencies": {
+        "@apollo/client": "^3.4.8",
+        "@sentry/react": "^7.12.1",
+        "@sentry/tracing": "^7.12.1",
+        "@testing-library/jest-dom": "^5.11.4",
+        "@testing-library/react": "^11.1.0",
+        "@testing-library/user-event": "^12.1.10",
+        "@tinymce/tinymce-react": "4.2.0",
+        "bootstrap": "5.1.0",
+        "fflate": "^0.8.3",
+        "graphql": "^15.6.0",
+        "history": "^5.0.1",
+        "hybrid-crypto-js": "^0.2.4",
+        "lottie-web": "^5.13.0",
+        "moment": "^2.29.1",
+        "prop-types": "^15.7.2",
+        "raw-loader": "^4.0.2",
+        "react": "17.0.2",
+        "react-beautiful-dnd": "^13.1.1",
+        "react-bootstrap": "^2.0.0-beta.6",
+        "react-confirm-alert": "^2.7.0",
+        "react-cropper": "^2.1.8",
+        "react-datepicker": "^4.4.0",
+        "react-dom": "^17.0.2",
+        "react-hook-form": "^7.13.0",
+        "react-intl": "^5.20.12",
+        "react-router-dom": "^5.2.0",
+        "react-scripts": "5.0.1",
+        "react-select": "^5.2.1"
+    },
+    "scripts": {
+        "start": "HOST=0.0.0.0 PORT=9007 react-scripts start",
+        "build": "react-scripts build",
+        "build-prod": "REACT_APP_ENV=production react-scripts build",
+        "build-dev": "REACT_APP_ENV=dev react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "lint": "eslint . --ext .js,.jsx",
+        "format:fix": "prettier --write \"**/*.+(js|jsx|json|css|md)\"",
+        "analyze": "source-map-explorer 'build/static/js/*.js'"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run lint && git add"
+        }
+    },
+    "prettier": {
+        "semi": false,
+        "printWidth": 140,
+        "singleQuote": true,
+        "trailingComma": "none"
+    },
+    "devDependencies": {
+        "eslint": "^8.23.0",
+        "eslint-config-react": "^1.1.7",
+        "eslint-config-react-app": "^7.0.1",
+        "eslint-config-standard": "^17.0.0",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-n": "^15.2.5",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^6.0.1",
+        "eslint-plugin-react": "^7.31.1",
+        "husky": "^7.0.4",
+        "prettier": "^2.3.2",
+        "sass": "^1.54.6",
+        "source-map-explorer": "^2.5.2"
+    }
+}

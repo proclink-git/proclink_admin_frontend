@@ -1,0 +1,43 @@
+.role-add-edit {
+  .radio-group {
+    .form-label {
+      margin-right: 12px;
+    }
+    .form-check + .form-check {
+      margin-left: 20px;
+    }
+  }
+  .title-p {
+    font-size: $fs-14;
+    font-weight: $fw-600;
+    color: var(--secondary-400);
+  }
+  .nav-tabs {
+    flex-wrap: nowrap;
+    border-bottom: none;
+    margin-bottom: 22px;
+    .nav-item {
+      width: 100%;
+      .nav-link {
+        display: block;
+        width: 100%;
+        border: none;
+        background-color: transparent;
+        letter-spacing: 0.4px;
+        font-weight: $fw-600;
+        font-size: $fs-14;
+        color: var(--secondary-400);
+        border-bottom: 1px solid transparent;
+        line-height: 1.3;
+        padding: 10px 5px;
+        cursor: pointer;
+        text-align: center;
+        text-transform: capitalize;
+        &.active {
+          color: $primary-300;
+          border-color: $primary-300;
+        }
+      }
+    }
+  }
+}

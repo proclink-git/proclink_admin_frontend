@@ -1,0 +1,17 @@
+.main-layout {
+  // height: 100vh;
+  display: flex;
+  // padding-left: 56px;
+  .main-container {
+    // height: calc(100% - 66px);
+    padding: 0px 0 30px 0;
+    position: relative;
+    // overflow-y: auto;
+  }
+  @include media-max(md) {
+    .main-container {
+      // height: calc(100% - 55px);
+      padding: 0px 0 15px 0;
+    }
+  }
+}

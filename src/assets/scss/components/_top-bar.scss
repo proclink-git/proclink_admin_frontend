@@ -1,0 +1,14 @@
+.top-bar {
+  position: relative;
+  top: -60px;
+  @include media-max(md) {
+    top: 0;
+    margin-bottom: 15px;
+  }
+  .buttons {
+    margin-left: 10px;
+    .btn + .btn {
+      margin-left: 15px;
+    }
+  }
+}

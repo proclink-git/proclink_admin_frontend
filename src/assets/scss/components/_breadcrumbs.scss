@@ -1,0 +1,33 @@
+.breadcrumb {
+  align-items: center;
+  margin-bottom: 27px;
+  position: relative;
+  z-index: 1;
+  i{
+    font-weight: bold;
+    font-size: $fs-30;
+  }
+  li {
+    font-size: $fs-24;
+    font-weight: $fw-700;
+    color: $white;
+    text-transform: capitalize;
+    line-height: 1.4;
+    &.active {
+      color: $white;
+    }
+    a {
+      color: $white;
+      display: block;
+      &:hover {
+        color: $primary-400;
+      }
+    }
+  }
+  @include media-max(xl){
+    margin-bottom: 20px;
+  }
+  @include media-max(md){
+   display: none;
+  }
+}

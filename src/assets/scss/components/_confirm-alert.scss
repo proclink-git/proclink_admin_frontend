@@ -1,0 +1,46 @@
+.react-confirm-alert-svg{
+  display: none;
+}
+.react-confirm-alert-body-element{
+  overflow: hidden;
+  padding-right: 6px;
+}
+#react-confirm-alert {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(90deg, rgba(12, 18, 28, 0.5) 13.68%, rgba(12, 18, 28, 0.3) 113.68%);
+  z-index: 9999;
+  .react-confirm-alert-overlay{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+  }
+  .react-confirm-alert{
+    background-color: var(--secondary-800);
+    width: 100%;
+    max-width: 465px;
+    border-radius: 5px;
+    box-shadow: -16px 24px 24px rgba(0, 0, 0, 0.24);
+    text-align: center;
+    padding: 23px 10px;
+    h2{
+      font-size: $fs-18;
+      line-height: 1.4;
+      color: var(--secondary-200);
+    }
+    p{
+      font-size: $fs-14;
+      color: var(--secondary-400);
+      margin: 27px 0;
+    }
+    .btn+.btn{
+      margin-left: 12px;
+    }
+  }
+}

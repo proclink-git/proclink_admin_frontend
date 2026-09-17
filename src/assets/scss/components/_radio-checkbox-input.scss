@@ -1,0 +1,128 @@
+.form-check:not(.form-switch) {
+  padding-left: 0;
+  margin-bottom: 15px;
+  input {
+    display: none;
+  }
+  label {
+    font-size: $fs-14;
+    color: var(--secondary-200);
+    position: relative;
+    line-height: 1.47;
+    cursor: pointer;
+    text-transform: capitalize;
+  }
+  // Radio input
+  input[type="radio"] {
+    &:checked ~ label {
+      &:before {
+        border-color: $primary-300;
+      }
+      &:after {
+        transform: scale(1);
+      }
+    }
+    & ~ label {
+      padding-left: 29px;
+      &:before {
+        content: "";
+        height: 20px;
+        width: 20px;
+        border-radius: 100%;
+        border: 1px solid var(--secondary-200);
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: all linear 0.2s;
+      }
+      &:after {
+        position: absolute;
+        content: "";
+        width: 10px;
+        height: 10px;
+        background-color: $primary-300;
+        border-radius: 100%;
+        top: 5px;
+        left: 5px;
+        transform: scale(0);
+        transition: all linear 0.1s;
+      }
+    }
+  }
+
+  // checkbox input
+  input[type="checkbox"] {
+    @include checkbox();
+  }
+  & + .form-check {
+    margin-left: 15px;
+  }
+}
+
+.form-switch {
+  .form-check-input {
+    background-color: var(--secondary-500);
+    width: 30px;
+    border-radius: 89px;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%0, 0, 0, 1%29'/%3e%3c/svg%3e") !important;
+    border: none;
+    vertical-align: middle;
+    margin-top: 0;
+    &:checked {
+      background-color: $primary-300;
+    }
+    &:focus {
+      box-shadow: 0 0 0 0.25rem rgba($color: $primary-300, $alpha: 0.3);
+    }
+    
+  }
+  &.success .form-check-input:checked{
+    background-color: $green-400;
+  }
+  &.danger input{
+    background-color: $red-300;
+  }
+}
+
+.required-field-switch {
+  align-items: center;
+  background-color: rgba($primary-300, 0.08);
+  border: 1px solid rgba($primary-300, 0.32);
+  border-radius: 999px;
+  display: inline-flex;
+  gap: 10px;
+  margin-bottom: 0;
+  min-height: 36px;
+  padding: 6px 12px;
+
+  &.form-switch {
+    padding-left: 12px;
+  }
+
+  .form-check-input {
+    background-color: var(--secondary-700);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23e3e3e3'/%3e%3c/svg%3e") !important;
+    border: 1px solid rgba($white, 0.16);
+    flex: 0 0 auto;
+    height: 22px;
+    margin-left: 0;
+    width: 42px;
+
+    &:checked {
+      background-color: $primary-400;
+      border-color: $primary-400;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($primary-300, 0.22);
+    }
+  }
+
+  .form-check-label {
+    color: var(--secondary-100);
+    cursor: pointer;
+    font-size: $fs-13;
+    font-weight: $fw-600;
+    line-height: 1;
+  }
+}

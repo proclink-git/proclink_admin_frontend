@@ -1,0 +1,83 @@
+.role-listing {
+  table {
+    .title-b {
+      white-space: nowrap;
+      i {
+        border-radius: 100%;
+        background-color: var(--secondary-700);
+        font-size: $fs-20;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 20px;
+        cursor: pointer;
+        &.active {
+          background-color: $primary-300;
+          color: var(--secondary-100);
+          transform: rotate(-180deg);
+          & ~ span {
+            color: $primary-300;
+          }
+        }
+      }
+      span {
+        vertical-align: middle;
+      }
+    }
+    .permissions {
+      padding: 16px 0 9px 40px;
+      .title-txt {
+        font-size: $fs-14;
+        line-height: 1.14;
+        letter-spacing: 0.4px;
+        color: #7c7e82;
+        font-weight: $fw-600;
+        margin-bottom: 25px;
+        text-transform: uppercase;
+      }
+      .p-cat {
+        margin-bottom: 24px;
+        .cat-title {
+          font-size: $fs-16;
+          color: $primary-200;
+          letter-spacing: 0.4px;
+          font-weight: $fw-700;
+          text-transform: uppercase;
+          margin: 0 14px 0 0;
+          width: 100px;
+          white-space: nowrap;
+        }
+        .permissions-txt {
+          width: calc(100% - 114px);
+        }
+      }
+    }
+    td:nth-last-child(2) {
+      width: 160px;
+    }
+    td:last-child {
+      width: 100px;
+    }
+    @include media-max(md) {
+      .title-b i {
+        margin-right: 5px;
+      }
+      .permissions {
+        padding: 5px 0 0 25px;
+        .title-txt {
+          margin-bottom: 20px;
+        }
+        .p-cat {
+          margin-bottom: 20px;
+          .cat-title {
+            font-size: $fs-14;
+            width: 90px;
+            margin: 0 10px 0 0;
+          }
+          .permissions-txt {
+            width: calc(100% - 104px);
+          }
+        }
+      }
+    }
+  }
+}

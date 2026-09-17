@@ -1,0 +1,233 @@
+.titleName {
+  font-size: $fs-16;
+  color: var(--secondary-200);
+  line-height: 1.35;
+  min-width: none;
+  margin: 5px 0 0 0;
+}
+.date {
+    font-size: $fs-12;
+    color: var(--secondary-400);
+    margin: 6px 0 0 0;
+    span {
+      color: $primary-200;
+      text-transform: uppercase;
+      border-radius: 4px;
+      background-color: var(--secondary-700);
+      display: inline-block;
+      padding: 0px 5px;
+      margin-right: 4px;
+      & ~ span {
+        margin-left: 12px;
+      }
+    }
+  }
+
+.inquiry-table {
+  .data-table-header {
+    background: var(--secondary-800);
+    border: 1px solid var(--secondary-700);
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+
+  .data-table-tabs {
+    border-bottom: 0;
+    gap: 8px;
+    margin: 18px 0 8px;
+    padding-bottom: 4px;
+
+    li {
+      background-color: var(--secondary-800);
+      border: 1px solid var(--secondary-700);
+      border-radius: 8px;
+      min-width: auto;
+      padding: 8px 14px;
+
+      &.active {
+        background-color: var(--card-02);
+        border-color: var(--primary-400);
+        color: var(--primary-200);
+      }
+    }
+  }
+
+  .table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    min-width: 760px;
+  }
+
+  thead {
+    border-bottom: 0;
+
+    th {
+      height: 38px;
+      padding: 8px 16px;
+    }
+  }
+
+  tbody {
+    border-bottom: 0;
+
+    tr {
+      &,
+      & ~ tr {
+        border-top: 0;
+      }
+
+      td {
+        background-color: var(--secondary-800);
+        border-bottom: 1px solid var(--secondary-700);
+        border-top: 1px solid var(--secondary-700);
+        padding: 18px 16px;
+
+        &:first-child {
+          border-left: 1px solid var(--secondary-700);
+          border-radius: 8px 0 0 8px;
+        }
+
+        &:last-child {
+          border-radius: 0 8px 8px 0;
+          border-right: 1px solid var(--secondary-700);
+        }
+      }
+    }
+  }
+
+  .titleName {
+    color: var(--secondary-100);
+    font-weight: $fw-700;
+    margin-top: 0;
+
+    a {
+      font-weight: $fw-700;
+    }
+  }
+}
+
+.inquiry-row-meta {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.inquiry-field-value {
+  color: var(--secondary-200);
+  display: inline-block;
+  max-width: 280px;
+  overflow-wrap: anywhere;
+
+  &--link {
+    color: var(--primary-200);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--primary-300);
+      text-decoration: underline;
+    }
+  }
+}
+
+.inquiry-empty {
+  color: var(--secondary-500);
+}
+
+.inquiry-status-badge {
+  border-radius: 4px;
+  font-size: $fs-12;
+  letter-spacing: 0;
+  padding: 4px 10px;
+}
+
+.inquiry-detail {
+  &__summary {
+    align-items: center;
+    background-color: var(--secondary-900);
+    border: 1px solid var(--secondary-700);
+    border-radius: 8px;
+    display: grid;
+    gap: 14px;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+    margin-bottom: 22px;
+    padding: 16px;
+
+    span {
+      color: var(--secondary-400);
+      display: block;
+      font-size: $fs-12;
+      line-height: 1.4;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    strong {
+      color: var(--secondary-100);
+      display: block;
+      font-size: $fs-15;
+      line-height: 1.35;
+    }
+  }
+
+  &__title {
+    color: var(--secondary-100);
+    font-size: $fs-14;
+    font-weight: $fw-700;
+    letter-spacing: 0;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  &__grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  &__item,
+  &__source {
+    background-color: rgba($white, 0.03);
+    border: 1px solid var(--secondary-700);
+    border-radius: 8px;
+    padding: 14px;
+
+    span {
+      color: var(--secondary-400);
+      display: block;
+      font-size: $fs-12;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    strong,
+    a {
+      color: var(--secondary-100);
+      display: block;
+      font-size: $fs-15;
+      font-weight: $fw-600;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--primary-200);
+      text-decoration: underline;
+    }
+  }
+
+  &__source {
+    margin-top: 12px;
+  }
+
+  @include media-max(md) {
+    &__summary {
+      grid-template-columns: 1fr;
+    }
+
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

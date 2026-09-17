@@ -1,0 +1,36 @@
+
+.card {
+    background: var(--secondary-800);
+    border: none;
+    border-radius: 8px;
+    padding: 25px;
+  
+    &:hover {
+      cursor: pointer;
+    }
+  
+    .card-body {
+      padding: 0;
+  
+      .card-title {
+        color: $primary-200;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 18px;
+        margin-bottom: 16px;
+      }
+      .card-text {
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 40px;
+      }
+    }
+  
+    @media (max-width: 1400px) {
+      margin-bottom: 20px;
+    }
+    @media (max-width: 576px) {
+      margin-bottom: 15px;
+    }
+  }
+  

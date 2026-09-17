@@ -1,0 +1,36 @@
+.header {
+  padding: 11px 12px 11px 16px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--secondary-700);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  left: 0px;
+  right: 0;
+  background-color: var(--secondary-900);
+  .dropdown-toggle {
+    text-transform: none;
+    font-size: $fs-14;
+    font-weight: $fw-500;
+    color: var(--secondary-100);
+    &:after {
+      display: none;
+    }
+    .img {
+      height: 40px;
+      width: 40px;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-right: 8px;
+      background-color: var(--secondary-800);
+    }
+  }
+  @include media-max(md) {
+    padding: 8px 12px;
+    .dropdown-toggle .img {
+      height: 35px;
+      width: 35px;
+      border-radius: 4px;
+    }
+  }
+}

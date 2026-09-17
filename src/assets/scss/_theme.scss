@@ -1,0 +1,146 @@
+html {
+  width: 100%;
+}
+
+body {
+  --bs-body-color: var(--secondary-200);
+  --bs-body-bg: var(--surface-color);
+  --bs-primary: #{$primary-400};
+  --bs-primary-rgb: 242, 116, 33;
+  --bs-secondary: var(--secondary-600);
+  --bs-secondary-rgb: 82, 82, 82;
+  --bs-link-color: #{$primary-300};
+  --bs-link-hover-color: #{$primary-400};
+  font-family: $primary-font;
+  font-weight: $fw-400;
+  font-size: $fs-12;
+  color: var(--secondary-100);
+  background-color: var(--surface-color);
+  font-style: normal;
+  letter-spacing: 0;
+  word-spacing: 0;
+  text-transform: inherit;
+  overflow-x: hidden;
+}
+
+%heading {
+  font-weight: $fw-700;
+  line-height: 1.4;
+  color: var(--secondary-100);
+}
+
+h1 {
+  @extend %heading;
+  font-size: $fs-28;
+}
+
+h2 {
+  @extend %heading;
+  font-size: $fs-24;
+}
+
+h3 {
+  @extend %heading;
+  font-size: $fs-20;
+}
+
+h4 {
+  @extend %heading;
+  font-size: $fs-18;
+}
+
+h5 {
+  @extend %heading;
+  font-size: $fs-16;
+}
+
+h6 {
+  @extend %heading;
+  font-size: $fs-14;
+}
+
+a {
+  color: $primary-300;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    color: $primary-300;
+  }
+}
+
+button,
+button:focus {
+  outline: none;
+}
+
+.pe-cursor {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  border: 0px;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+ul,
+ol {
+  li {
+    font-size: $fs-15;
+  }
+}
+
+.cover {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.loading {
+  z-index: 9999;
+  background-color: rgba($color: $black, $alpha: 0.27);
+  left: 0;
+}
+
+.gutter-9 {
+  margin-left: -9px;
+  margin-right: -9px;
+
+  div[class*="col-"] {
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+}
+
+.text-danger {
+  color: $red-300 !important;
+}
+
+.sticky-column {
+  position: sticky;
+  top: 85px;
+}
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.tox .tox-dropzone {
+  background: none !important;
+}
+
+// ::-moz-selection {
+//   color: #ffffff;
+//   background: #ffffff47;
+// }
+
+// ::selection {
+//   color: #ffffff;
+//   background: #ffffff47;
+// }

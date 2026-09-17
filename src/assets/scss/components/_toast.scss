@@ -1,0 +1,39 @@
+.toast {
+  border-radius: 16px;
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  z-index: 9999;
+  padding: 5px 12px;
+  &.danger {
+    --text: #{$red-400};
+    --btn-text: #{$red-300};
+    background-color: $red-100;
+  }
+  &.success {
+    --text: #1A593E;
+    --btn-text: #1B593F;
+    background-color: #9AD9BE;
+  }
+  .toast-body {
+    border-radius: 50px;
+    font-size: $fs-14;
+    font-weight: $fw-600;
+    color: var(--text);
+    padding: 0;
+    width: calc(100% - 100px);
+    line-height: 1;
+  }
+  .btn-link {
+    font-size: $fs-12;
+    color: var(--btn-text);
+    padding: 4px;
+    &::after {
+      display: none;
+    }
+  }
+  @include media-max(sm) {
+    width: calc(100% - 30px);
+    right: 15px;
+  }
+}

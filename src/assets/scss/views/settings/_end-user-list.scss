@@ -1,0 +1,33 @@
+.end-user-details {
+  hr {
+    margin: 0;
+  }
+  .item {
+    color: #fff;
+  }
+  .label {
+    color: #7c7e82;
+    margin-right: 16px;
+    margin-top: 2px;
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+  .form-data {
+    font-size: 14px;
+  }
+  .username {
+    color: #7c7e82;
+    margin-top: 16px;
+  }
+  .img-box {
+    margin-right: 24px;
+    img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;    
+    }
+  }
+  .user-personal-info {
+    flex-grow: 1;
+  }
+}

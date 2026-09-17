@@ -1,0 +1,33 @@
+.component-card {
+    background: var(--secondary-800) no-repeat center center / 100%;
+    aspect-ratio: 4/3;
+    border-radius: 12px;
+    background-color: #000;
+    border: 1px solid #353535;
+
+    &::after {
+        content: '';
+        background: linear-gradient(180deg, transparent, #0000009e);
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    .title {
+        z-index: 2;
+    }
+
+    .icon-btn {
+        top: 8px;
+        right: 8px;
+        width: 36px;
+        height: 36px;
+        line-height: 24px;
+        font-size: 24px;
+        z-index: 2;
+    }
+}

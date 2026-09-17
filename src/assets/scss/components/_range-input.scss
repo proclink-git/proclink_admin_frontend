@@ -1,0 +1,100 @@
+input[type="range"] {
+  /* removing default appearance */
+  -webkit-appearance: none;
+  appearance: none;
+  /* creating a custom design */
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  /*  slider progress trick  */
+  overflow: hidden;
+  border-radius: 16px;
+  background: transparent;
+}
+
+/* Track: webkit browsers */
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 14px;
+  background: var(--secondary-500);
+  border-radius: 16px;
+}
+
+/* Track: Mozilla Firefox */
+input[type="range"]::-moz-range-track {
+  height: 14px;
+  background: var(--secondary-500);
+  border-radius: 16px;
+}
+
+/* Thumb: webkit */
+input[type="range"]::-webkit-slider-thumb {
+  /* removing default appearance */
+  -webkit-appearance: none;
+  appearance: none;
+  /* creating a custom design */
+  height: 14px;
+  width: 14px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 2px solid $primary-400;
+  /*  slider progress trick  */
+  box-shadow: -407px 0 0 400px $primary-400;
+}
+
+/* Thumb: Firefox */
+input[type="range"]::-moz-range-thumb {
+  height: 14px;
+  width: 14px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 1px solid $primary-400;
+  box-shadow: -407px 0 0 400px $primary-400;
+}
+
+.range-list {
+  top: -28px;
+
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    pointer-events: none;
+  }
+
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 22px;
+    background: transparent;
+    border-radius: 0px;
+  }
+
+  /* Track: Mozilla Firefox */
+  input[type="range"]::-moz-range-track {
+    height: 22px;
+    border-radius: 0px;
+  }
+
+  /* Track: Mozilla Firefox */
+  input[type="range"]::-moz-range-track {
+    background: transparent;
+  }
+
+  /* Thumb: webkit */
+  input[type="range"]::-webkit-slider-thumb {
+    background: url(../../images/que-pin.svg) no-repeat center bottom / 16px 22px;
+    border: none;
+    box-shadow: none;
+    pointer-events: auto;
+    height: 22px;
+    width: 16px;
+  }
+
+  /* Thumb: Firefox */
+  input[type="range"]::-moz-range-thumb {
+    background: url(../../images/que-pin.svg) no-repeat center bottom / 12px 22px;
+    border: none;
+    box-shadow: none;
+    pointer-events: auto;
+    height: 22px;
+    width: 16px;
+  }
+}

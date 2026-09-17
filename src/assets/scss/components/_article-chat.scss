@@ -1,0 +1,17 @@
+.cm-btn {
+  background-color: var(--secondary-700);
+  font-size: $fs-12;
+  color: var(--secondary-400);
+  position: fixed;
+  right: -127px;
+  padding: 10px 20px;
+  z-index: 99;
+  cursor: pointer;
+  transform: rotate(-90deg);
+  transform-origin: left;
+  border-radius: 8px 8px 0px 0px;
+  top: 200px;
+  i {
+    margin-right: 5px;
+  }
+}

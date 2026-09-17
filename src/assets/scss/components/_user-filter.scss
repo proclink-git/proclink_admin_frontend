@@ -1,0 +1,17 @@
+.user-filter {
+  .box {
+    .title {
+      font-weight: normal;
+      margin-bottom: 25px;
+      span {
+        font-size: $fs-14;
+        font-weight: $fw-600;
+        color: var(--secondary-400);
+      }
+    }
+    &+.box{
+      margin-top: 15px;
+    }
+  }
+}
+

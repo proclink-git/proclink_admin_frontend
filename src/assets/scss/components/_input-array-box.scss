@@ -1,0 +1,121 @@
+.input-array-box {
+  border: 1px solid var(--secondary-700);
+  border-radius: 8px;
+  margin-right: 25px;
+  padding: 20px 15px;
+
+  &.editor-component-card {
+    padding: 0;
+
+    .right-btn {
+      top: 12px;
+    }
+  }
+
+  .right-btn {
+    background-color: var(--secondary-700);
+    border-radius: 0 8px 8px 0;
+    left: 100%;
+    top: 5px;
+    .btn {
+      font-size: 16px;
+      padding: 5px 4px 4px;
+    }
+  }
+  & + .input-array-box {
+    margin-top: 15px;
+  }
+}
+
+.editor-component-list {
+  display: flex;
+  flex-direction: column;
+
+  &__toolbar {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  &__toolbar-btn.btn {
+    min-width: 120px;
+  }
+}
+
+.editor-component-card {
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 6px 5px;
+  }
+
+  &__toggle.btn.btn-link {
+    color: var(--primary-300);
+  }
+
+  &__summary {
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    justify-content: space-between;
+    min-height: 84px;
+    padding: 20px 20px 20px 18px;
+    text-align: left;
+    width: 100%;
+
+    &:focus-visible {
+      box-shadow: inset 0 0 0 1px rgba(242, 116, 33, 0.45);
+      outline: 0;
+    }
+  }
+
+  &__summary-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+    padding-right: 16px;
+  }
+
+  &__summary-label {
+    color: var(--secondary-100);
+    font-size: $fs-16;
+    font-weight: $fw-700;
+    line-height: 1.4;
+  }
+
+  &__summary-icon {
+    color: var(--primary-300);
+    flex: 0 0 auto;
+    font-size: 18px;
+  }
+
+  &__fallback {
+    color: var(--secondary-100);
+    padding: 20px 18px;
+  }
+}
+
+@include media-max(md) {
+  .editor-component-list {
+    &__toolbar {
+      justify-content: stretch;
+    }
+
+    &__toolbar-btn.btn {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+  }
+
+  .editor-component-card {
+    &__summary {
+      min-height: 72px;
+      padding-right: 16px;
+    }
+  }
+}

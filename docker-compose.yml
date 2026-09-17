@@ -1,0 +1,44 @@
+services:
+  admin-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_ENV: ${REACT_APP_ENV:-dev}
+        REACT_APP_PUBLIC_KEY: ${REACT_APP_PUBLIC_KEY:-}
+        REACT_APP_S3_PREFIX: ${REACT_APP_S3_PREFIX:-}
+        REACT_APP_REST_API_URL: ${REACT_APP_REST_API_URL:-}
+        REACT_APP_API_URL: ${REACT_APP_API_URL:-}
+        REACT_APP_URL_PREFIX: ${REACT_APP_URL_PREFIX:-}
+        REACT_APP_PREVIEW_URL: ${REACT_APP_PREVIEW_URL:-}
+        REACT_APP_KNOWLEDGE_CENTER_URL: ${REACT_APP_KNOWLEDGE_CENTER_URL:-}
+        REACT_APP_GIPHY_API_URL: ${REACT_APP_GIPHY_API_URL:-}
+        REACT_APP_GIPHY_API_KEY: ${REACT_APP_GIPHY_API_KEY:-}
+        REACT_APP_GOOGLE_MAPS_EMBED_API_KEY: ${REACT_APP_GOOGLE_MAPS_EMBED_API_KEY:-}
+    image: ${IMAGE_NAME:-proclink-admin}:${IMAGE_TAG:-local}
+    environment:
+      REACT_APP_ENV: ${REACT_APP_ENV:-dev}
+      REACT_APP_S3_PREFIX: ${REACT_APP_S3_PREFIX:-}
+      REACT_APP_REST_API_URL: ${REACT_APP_REST_API_URL:-}
+      REACT_APP_API_URL: ${REACT_APP_API_URL:-}
+      REACT_APP_URL_PREFIX: ${REACT_APP_URL_PREFIX:-}
+      REACT_APP_PREVIEW_URL: ${REACT_APP_PREVIEW_URL:-}
+      REACT_APP_KNOWLEDGE_CENTER_URL: ${REACT_APP_KNOWLEDGE_CENTER_URL:-}
+      REACT_APP_GIPHY_API_URL: ${REACT_APP_GIPHY_API_URL:-}
+      REACT_APP_GIPHY_API_KEY: ${REACT_APP_GIPHY_API_KEY:-}
+      REACT_APP_GOOGLE_MAPS_EMBED_API_KEY: ${REACT_APP_GOOGLE_MAPS_EMBED_API_KEY:-}
+    ports:
+      - "${APP_PORT:-9007}:3002"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q -O /dev/null http://127.0.0.1:3002/healthz || exit 1"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    networks:
+      - proclink
+
+networks:
+  proclink:
+    driver: bridge
