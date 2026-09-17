@@ -8,6 +8,7 @@ import { GET_CONTACTS_LIST } from 'graph-ql/help/contacts'
 import ContactItemRow from 'shared/components/contact-item-row'
 import DataTable from 'shared/components/data-table'
 import { setSortType, parseParams, appendParams, toBackendPagination } from 'shared/utils'
+import useExportLeads, { LEAD_EXPORT_TYPE, buildExportLeadsInput } from 'shared/hooks/useExportLeads'
 
 function Contacts({ userPermission }) {
   const history = useHistory()
@@ -16,6 +17,7 @@ function Contacts({ userPermission }) {
   const contactListInput = useMemo(() => getContactListInput(requestParams), [requestParams])
   const [contactList, setContactList] = useState([])
   const totalRecord = useRef(0)
+  const { handleExport, loading: isExporting } = useExportLeads()
   const [tabs, setTabs] = useState([
     { name: 'UnRead', internalName: 'unRead', active: requestParams?.aState?.toString() === 'ur' },
     { name: 'Read', internalName: 'read', active: requestParams?.aState?.toString() === 'r' }
@@ -79,6 +81,18 @@ function Contacts({ userPermission }) {
     }
   }
 
+  function getExportInput() {
+    return buildExportLeadsInput(LEAD_EXPORT_TYPE.CONTACT, {
+      aState: getContactState(requestParams.aState) || 'ur',
+      sSearch: requestParams.sSearch,
+      bMarketingOpt: requestParams.bMarketingOpt,
+      sSortBy: requestParams.sSortBy,
+      nOrder: requestParams.nOrder,
+      dStartDate: requestParams.dStartDate,
+      dEndDate: requestParams.dEndDate
+    })
+  }
+
   async function handleHeaderEvent(name, value) {
     switch (name) {
       case 'rows':
@@ -88,6 +102,9 @@ function Contacts({ userPermission }) {
       case 'search':
         setRequestParams({ ...requestParams, sSearch: value, nSkip: 1 })
         appendParams({ sSearch: value, nSkip: 1 })
+        break
+      case 'download':
+        handleExport(getExportInput())
         break
       default:
         break
@@ -135,6 +152,7 @@ function Contacts({ userPermission }) {
   return (
     <>
       <DataTable
+        className="inquiry-table"
         columns={columns.current}
         sortEvent={handleSort}
         totalRecord={totalRecord.current}
@@ -148,7 +166,9 @@ function Contacts({ userPermission }) {
           },
           right: {
             search: true,
-            filter: false
+            filter: false,
+            download: true,
+            downloadDisabled: isExporting
           }
         }}
         headerEvent={(name, value) => handleHeaderEvent(name, value)}

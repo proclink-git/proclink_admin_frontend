@@ -8,6 +8,7 @@ import { LIST_CHATBOT_RESPONSE } from 'graph-ql/chat-bot-input/query'
 import ChatBotItemRow from 'shared/components/chatBot-item-row'
 import DataTable from 'shared/components/data-table'
 import { setSortType, parseParams, appendParams } from 'shared/utils'
+import useExportLeads, { LEAD_EXPORT_TYPE, buildExportLeadsInput } from 'shared/hooks/useExportLeads'
 // import Drawer from 'shared/components/drawer'
 // import FeedbackContactFilter from 'shared/components/feedback-contact-filter'
 
@@ -18,6 +19,7 @@ function ChatBotResponse({ userPermission }) {
   const [requestParams, setRequestParams] = useState(getRequestParams())
   const totalRecord = useRef(0)
   const [feedbackList, setFeedbackList] = useState([])
+  const { handleExport, loading: isExporting } = useExportLeads()
   // const [isFilterOpen, setIsFilterOpen] = useState(false)
   const columns = useRef([
     { name: <FormattedMessage id="name" />, internalName: 'sName', type: 0 },
@@ -69,6 +71,16 @@ function ChatBotResponse({ userPermission }) {
     }
   }
 
+  function getExportInput() {
+    return buildExportLeadsInput(LEAD_EXPORT_TYPE.CHATBOT, {
+      sSearch: requestParams.sSearch,
+      sSortBy: requestParams.sSortBy,
+      nOrder: requestParams.nOrder,
+      dStartDate: requestParams.dStartDate,
+      dEndDate: requestParams.dEndDate
+    })
+  }
+
   async function handleHeaderEvent(name, value) {
     switch (name) {
       case 'rows':
@@ -78,6 +90,9 @@ function ChatBotResponse({ userPermission }) {
       case 'search':
         setRequestParams({ ...requestParams, sSearch: value, nSkip: 1 })
         appendParams({ sSearch: value, nSkip: 1 })
+        break
+      case 'download':
+        handleExport(getExportInput())
         break
       // case 'filter':
       //   setIsFilterOpen(value)
@@ -102,6 +117,7 @@ function ChatBotResponse({ userPermission }) {
   return (
     <>
       <DataTable
+        className="inquiry-table"
         columns={columns.current}
         sortEvent={handleSort}
         // tabs={tabs}
@@ -114,7 +130,9 @@ function ChatBotResponse({ userPermission }) {
             rows: true
           },
           right: {
-            search: true
+            search: true,
+            download: true,
+            downloadDisabled: isExporting
             // filter: true
           }
         }}

@@ -11,6 +11,7 @@ import { parseParams, appendParams, toBackendPagination } from 'shared/utils'
 import Drawer from 'shared/components/drawer'
 import FeedbackContactFilter from 'shared/components/feedback-contact-filter'
 import { DEFAULT_INQUIRY_STATE, INQUIRY_TABS, getInquiryFields, getValidInquiryType } from 'shared/constants/inquiry'
+import useExportLeads, { LEAD_EXPORT_TYPE, buildExportLeadsInput } from 'shared/hooks/useExportLeads'
 
 function Inquiry({ userPermission }) {
   const history = useHistory()
@@ -23,6 +24,7 @@ function Inquiry({ userPermission }) {
   const [feedbackList, setFeedbackList] = useState([])
   const [isFilterOpen, setIsFilterOpen] = useState(false)
   const [tabs, setTabs] = useState(getTabs(requestParams.eHeaderCategoryType))
+  const { handleExport, loading: isExporting } = useExportLeads()
   const columns = useMemo(() => {
     return getInquiryFields(requestParams.eHeaderCategoryType).map((field) => ({
       ...field,
@@ -103,6 +105,18 @@ function Inquiry({ userPermission }) {
     return nextInput
   }
 
+  function getExportInput() {
+    return buildExportLeadsInput(LEAD_EXPORT_TYPE.INQUIRY, {
+      eHeaderCategoryType: getInquiryType(requestParams.eHeaderCategoryType),
+      aState: getInquiryState(requestParams.aState),
+      sSearch: requestParams.sSearch,
+      sSortBy: requestParams.sSortBy,
+      nOrder: requestParams.nOrder,
+      dStartDate: requestParams.dStartDate,
+      dEndDate: requestParams.dEndDate
+    })
+  }
+
   async function handleHeaderEvent(name, value) {
     switch (name) {
       case 'rows':
@@ -115,6 +129,9 @@ function Inquiry({ userPermission }) {
         break
       case 'filter':
         setIsFilterOpen(value)
+        break
+      case 'download':
+        handleExport(getExportInput())
         break
       default:
         break
@@ -189,7 +206,9 @@ function Inquiry({ userPermission }) {
           },
           right: {
             search: true,
-            filter: true
+            filter: true,
+            download: true,
+            downloadDisabled: isExporting
           }
         }}
         headerEvent={(name, value) => handleHeaderEvent(name, value)}

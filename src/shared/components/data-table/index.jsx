@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { Suspense } from 'react'
-import { Button, Form, Table } from 'react-bootstrap'
+import { Button, Form, Spinner, Table } from 'react-bootstrap'
 import Select from 'react-select'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useApolloClient } from '@apollo/client'
@@ -154,13 +154,27 @@ function DataTable({
                 </Button>
               </ToolTip>
             )}
+            {header.right.download && (
+              <ToolTip toolTipMessage={<FormattedMessage id="download" />}>
+                <Button
+                  variant="info"
+                  className="square btn-download"
+                  size="sm"
+                  disabled={header.right.downloadDisabled}
+                  onClick={() => headerEvent('download', true)}
+                >
+                  <FormattedMessage id="download" />
+                  {header.right.downloadDisabled ? <Spinner animation="border" size="sm" /> : <i className="icon-download" />}
+                </Button>
+              </ToolTip>
+            )}
             {header.right.component && component}
           </div>
         </div>
       )}
-      <ul className="data-table-tabs d-flex">
-        {tabs &&
-          tabs.map((item) => {
+      {tabs?.length > 0 && (
+        <ul className="data-table-tabs d-flex">
+          {tabs.map((item) => {
             if (item.isAllowedTo) {
               return (
                 <PermissionProvider key={item.internalName} isAllowedTo={item.isAllowedTo}>
@@ -177,7 +191,8 @@ function DataTable({
               )
             }
           })}
-      </ul>
+        </ul>
+      )}
       <Table className="table-borderless" responsive="sm">
         <thead>
           <tr>

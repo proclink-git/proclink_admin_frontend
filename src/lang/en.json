@@ -255,6 +255,7 @@
   "status": "Status",
   "newTag": "New Tag",
   "download": "Download",
+  "noRecordsToDownload": "No records to download",
   "downloadCV": "Download CV",
   "personalInfo": "Personal Info",
   "otherDetails": "Other Details",
