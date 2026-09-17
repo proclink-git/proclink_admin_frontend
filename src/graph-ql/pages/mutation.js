@@ -15,3 +15,11 @@ export const EDIT_PAGE = gql`
     }
   }
 `
+
+export const DELETE_PAGE = gql`
+  mutation DeletePage($input: oDeleteInput) {
+    deletePage(input: $input) {
+      sMessage
+    }
+  }
+`

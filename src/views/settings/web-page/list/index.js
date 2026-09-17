@@ -1,28 +1,62 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useQuery } from '@apollo/client'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { useMutation, useQuery } from '@apollo/client'
 import { useHistory } from 'react-router'
+import { useIntl } from 'react-intl'
+import { confirmAlert } from 'react-confirm-alert'
 
 import DataTable from 'shared/components/data-table'
 import TopBar from 'shared/components/top-bar'
+import CustomAlert from 'shared/components/alert'
+import { ToastrContext } from 'shared/components/toastr'
+import { TOAST_TYPE } from 'shared/constants'
 import { appendParams, parseParams } from 'shared/utils'
 import { allRoutes } from 'shared/constants/AllRoutes'
 import { GET_PAGES_LIST } from 'graph-ql/pages/query'
+import { DELETE_PAGE } from 'graph-ql/pages/mutation'
 import PageRow from 'shared/components/page-row'
+
+function isAlreadyDeletedError(errors) {
+  const raw = errors?.[0]?.message || ''
+  try {
+    const parsed = JSON.parse(raw)
+    return /already deleted/i.test(parsed?.message || raw)
+  } catch (error) {
+    return /already deleted/i.test(raw)
+  }
+}
 
 function ListPage() {
   const history = useHistory()
+  const { dispatch } = useContext(ToastrContext)
   const params = useRef(parseParams(location.search))
   const [requestParams, setRequestParams] = useState(getRequestParams())
-  // const { dispatch } = useContext(ToastrContext)
   const totalData = useRef(null)
   const [listTestimonialList, setTestimonialList] = useState([])
   const columns = useRef(getActionColumns())
+  const labels = {
+    close: useIntl().formatMessage({ id: 'close' }),
+    yes: useIntl().formatMessage({ id: 'yes' }),
+    no: useIntl().formatMessage({ id: 'no' }),
+    confirmationTitle: useIntl().formatMessage({ id: 'confirmation' }),
+    confirmationMessage: useIntl().formatMessage({ id: 'areYouSureYouWantToDeleteThisPage' })
+  }
 
-  const { loading } = useQuery(GET_PAGES_LIST, {
+  const { loading, refetch } = useQuery(GET_PAGES_LIST, {
     variables: { input: requestParams },
     onCompleted: (data) => {
       totalData.current = data?.listPage?.nTotal
       setTestimonialList(data?.listPage?.aResults)
+    }
+  })
+
+  const [deletePage, { loading: deleteLoading }] = useMutation(DELETE_PAGE, {
+    onCompleted: (data) => {
+      if (data?.deletePage) {
+        dispatch({
+          type: 'SHOW_TOAST',
+          payload: { message: data.deletePage.sMessage, type: TOAST_TYPE.Success, btnTxt: labels.close }
+        })
+      }
     }
   })
 
@@ -57,6 +91,36 @@ function ListPage() {
       default:
         break
     }
+  }
+
+  async function refreshPageList() {
+    const { data } = await refetch()
+    if (data?.listPage) {
+      totalData.current = data.listPage.nTotal
+      setTestimonialList(data.listPage.aResults)
+    }
+  }
+
+  function handleDelete(id) {
+    confirmAlert({
+      title: labels.confirmationTitle,
+      message: labels.confirmationMessage,
+      customUI: CustomAlert,
+      buttons: [
+        {
+          label: labels.yes,
+          onClick: async () => {
+            const { data, errors } = await deletePage({ variables: { input: { _id: id } } })
+            if (data?.deletePage || isAlreadyDeletedError(errors)) {
+              await refreshPageList()
+            }
+          }
+        },
+        {
+          label: labels.no
+        }
+      ]
+    })
   }
 
   async function handleHeaderEvent(name, value) {
@@ -106,7 +170,7 @@ function ListPage() {
         columns={columns.current}
         totalRecord={totalData.current}
         headerEvent={handleHeaderEvent}
-        isLoading={loading}
+        isLoading={loading || deleteLoading}
         header={{
           left: {
             rows: true
@@ -120,7 +184,7 @@ function ListPage() {
         pagination={{ currentPage: requestParams.nSkip, pageSize: requestParams.nLimit }}
       >
         {listTestimonialList?.map((testimonial) => {
-          return <PageRow key={testimonial._id} data={testimonial} />
+          return <PageRow key={testimonial._id} data={testimonial} onDelete={handleDelete} />
         })}
       </DataTable>
     </>
