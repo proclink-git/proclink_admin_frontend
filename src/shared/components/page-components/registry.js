@@ -803,6 +803,13 @@ export function normalizeProductWorkflowPayload(value = {}) {
   }
 }
 
+function normalizeLeadershipCardsForPayload(cards = []) {
+  return (Array.isArray(cards) ? cards : []).map((card = {}) => ({
+    ...card,
+    oPopupImg: card?.oPopupImg?.sUrl ? card.oPopupImg : null
+  }))
+}
+
 function normalizeComponentValueForPayload(dataKey = '', value = {}) {
   if (dataKey === 'oDLF') return buildDlfPayload(value)
   if (dataKey === 'oSSC') return normalizeSectorScrollPayload(value)
@@ -811,6 +818,12 @@ function normalizeComponentValueForPayload(dataKey = '', value = {}) {
   if (dataKey === 'oMTI') return normalizeManufacturingTransformationImpactPayload(value)
   if (dataKey === 'oPIF') return normalizeProductInterfacePayload(value)
   if (dataKey === 'oPWA') return normalizeProductWorkflowPayload(value)
+  if (dataKey === 'oLSC' || dataKey === 'oALP') {
+    return {
+      ...value,
+      aCard: normalizeLeadershipCardsForPayload(value?.aCard)
+    }
+  }
 
   return value
 }

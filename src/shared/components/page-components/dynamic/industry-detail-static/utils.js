@@ -77,6 +77,7 @@ export function getDefaultAnimatedFeatureCard() {
 export function getDefaultLeadershipCard() {
   return {
     oImg: getDefaultImage(),
+    oPopupImg: getDefaultImage(),
     sName: '',
     sRole: '',
     sRedirectUrl: '',

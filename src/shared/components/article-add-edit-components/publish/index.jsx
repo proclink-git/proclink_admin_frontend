@@ -101,21 +101,36 @@ function cleanRelevantCards(cards = []) {
     .filter((card) => card?.sTitle || card?.sRedirectUrl || card?.sSlug || card?.oImg?.sUrl || card?.oImg?.sText)
 }
 
+function cleanFeaturedImage(value = {}) {
+  const image = {
+    sText: value?.sText || '',
+    sCaption: value?.sCaption || '',
+    sAttribute: value?.sAttribute || '',
+    sUrl: value?.sUrl || ''
+  }
+
+  if (value?.oMeta) {
+    image.oMeta = {
+      nWidth: value.oMeta.nWidth,
+      nHeight: value.oMeta.nHeight,
+      nSize: value.oMeta.nSize
+    }
+  }
+
+  return image
+}
+
 function cleanLeadershipCards(cards = []) {
   return (Array.isArray(cards) ? cards : [])
     .map((card = {}) => ({
-      oImg: {
-        sText: card?.oImg?.sText || '',
-        sCaption: card?.oImg?.sCaption || '',
-        sAttribute: card?.oImg?.sAttribute || '',
-        sUrl: card?.oImg?.sUrl || ''
-      },
+      oImg: cleanFeaturedImage(card?.oImg),
+      oPopupImg: card?.oPopupImg?.sUrl ? cleanFeaturedImage(card.oPopupImg) : null,
       sName: card?.sName || '',
       sRole: card?.sRole || '',
       sRedirectUrl: card?.sRedirectUrl || '',
       eTarget: card?.eTarget || '_self'
     }))
-    .filter((card) => card?.sName || card?.sRole || card?.sRedirectUrl || card?.oImg?.sUrl || card?.oImg?.sText)
+    .filter((card) => card?.sName || card?.sRole || card?.sRedirectUrl || card?.oImg?.sUrl || card?.oImg?.sText || card?.oPopupImg?.sUrl)
 }
 
 function cleanLogoItems(items = []) {

@@ -206,7 +206,16 @@ function normalizeLeadershipCard(card = {}) {
     ...getDefaultLeadershipCard(),
     ...card,
     eTarget: card?.eTarget || '_self',
-    oImg: normalizeImage(card?.oImg)
+    oImg: normalizeImage(card?.oImg),
+    oPopupImg: normalizeImage(card?.oPopupImg)
+  }
+}
+
+function normalizeLeadershipCardForSubmit(card = {}) {
+  const nextCard = normalizeLeadershipCard(card)
+  return {
+    ...nextCard,
+    oPopupImg: nextCard?.oPopupImg?.sUrl ? nextCard.oPopupImg : null
   }
 }
 
@@ -358,8 +367,8 @@ function normalizeAboutUsForSubmit(aboutUs = {}) {
       sTitle: data?.oALP?.sTitle || '',
       sDescription: data?.oALP?.sDescription || '',
       aCard: (Array.isArray(data?.oALP?.aCard) ? data.oALP.aCard : [])
-        .map(normalizeLeadershipCard)
-        .filter((card) => card?.sName || card?.sDesignation || card?.sDescription || card?.sRedirectUrl || card?.oImg?.sUrl)
+        .map(normalizeLeadershipCardForSubmit)
+        .filter((card) => card?.sName || card?.sDesignation || card?.sDescription || card?.sRedirectUrl || card?.oImg?.sUrl || card?.oPopupImg?.sUrl)
     },
     oHWC: {
       sTitle: data?.oHWC?.sTitle || '',

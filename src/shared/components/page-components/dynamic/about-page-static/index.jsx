@@ -622,7 +622,7 @@ function LeadershipSection({ basePath = 'oAboutUs.oALP' }) {
         >
           <Form.Label>Leader {index + 1}</Form.Label>
           <Row>
-            <Col sm="8">
+            <Col sm="6">
               <CountInput type="text" currentLength={values?.aCard?.[index]?.sName?.length} register={register(`${basePath}.aCard[${index}].sName`)} error={errors} name={`${basePath}.aCard[${index}].sName`} label="Name" />
               <CountInput
                 type="text"
@@ -642,13 +642,28 @@ function LeadershipSection({ basePath = 'oAboutUs.oALP' }) {
                 label="Description"
               />
               <CommonInput type="text" register={register} errors={errors} name={`${basePath}.aCard[${index}].sRedirectUrl`} label="Redirect Url" disableDefaultMaxLength />
+              <input type="hidden" value="_self" {...register(`${basePath}.aCard[${index}].eTarget`)} />
             </Col>
-            <Col sm="4" className="add-article">
+            <Col sm="3" className="add-article">
               <ImageDimensionNote width={412} height={500} subject="portrait" />
               <CategoryPlayerTeamImage
                 galleryType="pb"
                 title="Portrait"
                 name={`${basePath}.aCard[${index}].oImg`}
+                register={register}
+                setValue={setValue}
+                values={getValues()}
+                errors={errors}
+                clearErrors={clearErrors}
+                hideAttribution
+              />
+            </Col>
+            <Col sm="3" className="add-article">
+              <ImageDimensionNote width={412} height={500} subject="popup image" />
+              <CategoryPlayerTeamImage
+                galleryType="pb"
+                title="Popup image"
+                name={`${basePath}.aCard[${index}].oPopupImg`}
                 register={register}
                 setValue={setValue}
                 values={getValues()}

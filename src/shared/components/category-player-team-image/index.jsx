@@ -56,6 +56,7 @@ function CategoryPlayerTeamImage({
     setValue(`${name}.sText`, '')
     setValue(`${name}.sCaption`, '')
     setValue(`${name}.sAttribute`, '')
+    setValue(`${name}.oMeta`, undefined)
     if (urlFieldName) setValue(urlFieldName, '')
     clearErrors && clearErrors(`${name}`)
     onDelete && onDelete(name)
@@ -63,11 +64,19 @@ function CategoryPlayerTeamImage({
 
   const handleData = (data) => {
     const selectedUrl = data?.sUrl || ''
+    const oMeta = data?.oMeta
+      ? {
+          nWidth: data.oMeta.nWidth,
+          nHeight: data.oMeta.nHeight,
+          nSize: data.oMeta.nSize
+        }
+      : undefined
 
     setValue(`${name}.sText`, data?.sText)
     setValue(`${name}.sCaption`, data?.sCaption)
     setValue(`${name}.sAttribute`, data?.sAttribute)
     setValue(`${name}.sUrl`, selectedUrl)
+    setValue(`${name}.oMeta`, oMeta)
     if (urlFieldName) setValue(urlFieldName, selectedUrl)
     setImage(getS3Url(selectedUrl))
     clearErrors && clearErrors(`${name}`)

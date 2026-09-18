@@ -84,6 +84,17 @@ _id
           sAttribute
           sUrl
         }
+        oPopupImg {
+          sText
+          sCaption
+          sAttribute
+          sUrl
+          oMeta {
+            nWidth
+            nHeight
+            nSize
+          }
+        }
         sName
         sRole
         sRedirectUrl

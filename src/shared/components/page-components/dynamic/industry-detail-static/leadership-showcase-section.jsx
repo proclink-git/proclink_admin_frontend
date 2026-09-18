@@ -71,7 +71,7 @@ export default function LeadershipShowcaseSection({
         >
           <Form.Label>Card {index + 1}</Form.Label>
           <Row>
-            <Col md="4" className="add-article">
+            <Col md="3" className="add-article">
               <ImageDimensionNote width={557} height={696} subject="leadership showcase image" />
               <CategoryPlayerTeamImage
                 galleryType="pb"
@@ -85,7 +85,21 @@ export default function LeadershipShowcaseSection({
                 hideAttribution
               />
             </Col>
-            <Col md="8">
+            <Col md="3" className="add-article">
+              <ImageDimensionNote width={557} height={696} subject="popup image" />
+              <CategoryPlayerTeamImage
+                galleryType="pb"
+                title="Popup image"
+                name={`${basePath}.aCard[${index}].oPopupImg`}
+                register={register}
+                setValue={setValue}
+                values={getValues()}
+                errors={errors}
+                clearErrors={clearErrors}
+                hideAttribution
+              />
+            </Col>
+            <Col md="6">
               <CommonInput type="text" register={register} errors={errors} name={`${basePath}.aCard[${index}].sName`} label="Name" disableDefaultMaxLength />
               <CommonInput type="text" register={register} errors={errors} name={`${basePath}.aCard[${index}].sRole`} label="Role" disableDefaultMaxLength />
               <CommonInput type="text" register={register} errors={errors} name={`${basePath}.aCard[${index}].sRedirectUrl`} label="Redirect Url" disableDefaultMaxLength />

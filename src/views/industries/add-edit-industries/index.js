@@ -402,6 +402,7 @@ function normalizeIndustryFormData(value = {}) {
         sDescription: data?.oLSC?.sDescription || '',
         aCard: normalizeArray(data?.oLSC?.aCard, getDefaultLeadershipCard, (card = {}) => ({
           oImg: normalizeImage(card?.oImg),
+          oPopupImg: normalizeImage(card?.oPopupImg),
           sName: card?.sName || '',
           sRole: card?.sRole || '',
           sRedirectUrl: card?.sRedirectUrl || '',
@@ -647,12 +648,13 @@ function normalizeIndustryForSubmit(data = {}) {
       aCard: (Array.isArray(value?.oLSC?.aCard) ? value.oLSC.aCard : [])
         .map((card = {}) => ({
           oImg: normalizeImage(card?.oImg),
+          oPopupImg: card?.oPopupImg?.sUrl ? normalizeImage(card.oPopupImg) : null,
           sName: card?.sName || '',
           sRole: card?.sRole || '',
           sRedirectUrl: card?.sRedirectUrl || '',
           eTarget: card?.eTarget || '_self'
         }))
-        .filter((card) => card?.sName || card?.sRole || card?.sRedirectUrl || card?.oImg?.sUrl || card?.oImg?.sText)
+        .filter((card) => card?.sName || card?.sRole || card?.sRedirectUrl || card?.oImg?.sUrl || card?.oImg?.sText || card?.oPopupImg?.sUrl)
     },
     oFAQ: {
       sTitle: value?.oFAQ?.sTitle || '',

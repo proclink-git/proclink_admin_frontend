@@ -55,6 +55,7 @@ export function getDefaultBeliefItem() {
 export function getDefaultLeadershipCard() {
   return {
     oImg: getDefaultImage(),
+    oPopupImg: getDefaultImage(),
     sName: '',
     sDesignation: '',
     sDescription: '',

@@ -160,10 +160,19 @@ function normalizeLogo(value = {}) {
 function normalizeLeadershipCard(value = {}) {
   return {
     oImg: normalizeImage(value?.oImg),
+    oPopupImg: normalizeImage(value?.oPopupImg),
     sName: value?.sName || '',
     sRole: value?.sRole || '',
     sRedirectUrl: value?.sRedirectUrl || '',
     eTarget: value?.eTarget || '_self'
+  }
+}
+
+function normalizeLeadershipCardForSubmit(value = {}) {
+  const nextCard = normalizeLeadershipCard(value)
+  return {
+    ...nextCard,
+    oPopupImg: nextCard?.oPopupImg?.sUrl ? nextCard.oPopupImg : null
   }
 }
 
@@ -660,7 +669,7 @@ function AddEditArticle({ userPermission }) {
       oLSC: {
         sTitle: data?.oLSC?.sTitle || '',
         sDescription: data?.oLSC?.sDescription || '',
-        aCard: normalizeArray(data?.oLSC?.aCard, getDefaultLeadershipCard, normalizeLeadershipCard)
+        aCard: normalizeArray(data?.oLSC?.aCard, getDefaultLeadershipCard, normalizeLeadershipCardForSubmit)
       },
       oEPO: {
         sTitle: data?.oEPO?.sTitle || '',
