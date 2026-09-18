@@ -48,6 +48,7 @@ import {
 } from 'shared/components/page-components/registry'
 
 const PRODUCT_URL_PREFIX = 'products/'
+const PRODUCT_SEO_TYPE = 'pr'
 const editorSectionPrefix = 'product-editor'
 
 function getDefaultSeo() {
@@ -68,7 +69,7 @@ function getDefaultSeo() {
     },
     sCUrl: '',
     sRobots: META_ROBOTS[0],
-    eType: 'p'
+    eType: PRODUCT_SEO_TYPE
   }
 }
 
@@ -547,7 +548,7 @@ function normalizeProductFormData(value = {}) {
     oSeo: {
       ...defaultData.oSeo,
       ...(data?.oSeo || {}),
-      eType: 'p',
+      eType: PRODUCT_SEO_TYPE,
       sSlug: stripRepeatedPrefix(data?.oSeo?.sSlug, PRODUCT_URL_PREFIX),
       sCUrl: stripRepeatedPrefix(data?.oSeo?.sCUrl, PRODUCT_URL_PREFIX),
       sRobots: data?.oSeo?.sRobots || META_ROBOTS[0],
@@ -931,7 +932,7 @@ function AddEditProduct() {
       oTwitter: getCleanSocialSeo(currentSeo?.oTwitter),
       sCUrl: currentSeo?.sCUrl || '',
       sRobots: currentSeo?.sRobots || META_ROBOTS[0],
-      eType: 'p'
+      eType: PRODUCT_SEO_TYPE
     }
 
     if (!hasMeaningfulValue(oSeo)) return undefined
@@ -1034,7 +1035,7 @@ function AddEditProduct() {
             <AddPageComponentsList name="aComponent" namespace="" pageType="p" anchorPrefix={editorSectionPrefix} />
             <div id={seoSectionId} className="editor-section-target mt-4">
               <Form.Label className="text-uppercase small text-muted mb-3">SEO</Form.Label>
-              <input type="hidden" value="p" {...register('oSeo.eType')} />
+              <input type="hidden" value={PRODUCT_SEO_TYPE} {...register('oSeo.eType')} />
               <CommonSEO
                 register={register}
                 errors={errors}
@@ -1047,7 +1048,7 @@ function AddEditProduct() {
                 setValue={setValue}
                 control={control}
                 id={id}
-                slugType={'p'}
+                slugType={PRODUCT_SEO_TYPE}
                 slug={productTitle && defaultURL ? `${defaultURL}${productTitle}` : productTitle || undefined}
                 hidden
                 categoryURL={defaultURL}

@@ -101,7 +101,7 @@ function CommonSEO({
       setAvailableSlug('')
     }
     if (
-      ((oData.sSlug && slugType === 't') || (oData.sSlug && slugType === 'p')) &&
+      ((oData.sSlug && slugType === 't') || (oData.sSlug && (slugType === 'p' || slugType === 'pr'))) &&
       !values.oSeo.sSlug
     ) {
       if (isFromTitle && categoryURL) setValue('oSeo.sSlug', oData?.sSlug?.replace(categoryURL, ''))
