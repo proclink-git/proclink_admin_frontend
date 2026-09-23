@@ -97,6 +97,7 @@ _id
         }
         sName
         sRole
+        sDescription
         sRedirectUrl
         eTarget
       }

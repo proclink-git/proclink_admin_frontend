@@ -127,10 +127,11 @@ function cleanLeadershipCards(cards = []) {
       oPopupImg: card?.oPopupImg?.sUrl ? cleanFeaturedImage(card.oPopupImg) : null,
       sName: card?.sName || '',
       sRole: card?.sRole || '',
+      sDescription: card?.sDescription || '',
       sRedirectUrl: card?.sRedirectUrl || '',
       eTarget: card?.eTarget || '_self'
     }))
-    .filter((card) => card?.sName || card?.sRole || card?.sRedirectUrl || card?.oImg?.sUrl || card?.oImg?.sText || card?.oPopupImg?.sUrl)
+    .filter((card) => card?.sName || card?.sRole || card?.sDescription || card?.sRedirectUrl || card?.oImg?.sUrl || card?.oImg?.sText || card?.oPopupImg?.sUrl)
 }
 
 function cleanLogoItems(items = []) {

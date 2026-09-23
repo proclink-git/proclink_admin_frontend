@@ -806,6 +806,7 @@ export function normalizeProductWorkflowPayload(value = {}) {
 function normalizeLeadershipCardsForPayload(cards = []) {
   return (Array.isArray(cards) ? cards : []).map((card = {}) => ({
     ...card,
+    sDescription: card?.sDescription || '',
     oPopupImg: card?.oPopupImg?.sUrl ? card.oPopupImg : null
   }))
 }

@@ -469,6 +469,7 @@ function normalizeServiceFormData(value = {}) {
         oPopupImg: normalizeImage(card?.oPopupImg),
         sName: card?.sName || '',
         sRole: card?.sRole || '',
+        sDescription: card?.sDescription || '',
         sRedirectUrl: card?.sRedirectUrl || '',
         eTarget: card?.eTarget || '_self'
       }))
@@ -751,10 +752,11 @@ function normalizeServiceForSubmit(data = {}) {
           oPopupImg: card?.oPopupImg?.sUrl ? normalizeImage(card.oPopupImg) : null,
           sName: card?.sName || '',
           sRole: card?.sRole || '',
+          sDescription: card?.sDescription || '',
           sRedirectUrl: card?.sRedirectUrl || '',
           eTarget: card?.eTarget || '_self'
         }))
-        .filter((card) => card?.sName || card?.sRole || card?.sRedirectUrl || card?.oImg?.sUrl || card?.oImg?.sText || card?.oPopupImg?.sUrl)
+        .filter((card) => card?.sName || card?.sRole || card?.sDescription || card?.sRedirectUrl || card?.oImg?.sUrl || card?.oImg?.sText || card?.oPopupImg?.sUrl)
     },
     oFAQ: {
       sTitle: value?.oFAQ?.sTitle || '',

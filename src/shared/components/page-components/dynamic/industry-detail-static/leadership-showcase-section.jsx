@@ -102,6 +102,15 @@ export default function LeadershipShowcaseSection({
             <Col md="6">
               <CommonInput type="text" register={register} errors={errors} name={`${basePath}.aCard[${index}].sName`} label="Name" disableDefaultMaxLength />
               <CommonInput type="text" register={register} errors={errors} name={`${basePath}.aCard[${index}].sRole`} label="Role" disableDefaultMaxLength />
+              <CountInput
+                textarea
+                rows={6}
+                currentLength={values?.aCard?.[index]?.sDescription?.length}
+                register={register(`${basePath}.aCard[${index}].sDescription`)}
+                error={errors}
+                name={`${basePath}.aCard[${index}].sDescription`}
+                label="Description"
+              />
               <CommonInput type="text" register={register} errors={errors} name={`${basePath}.aCard[${index}].sRedirectUrl`} label="Redirect Url" disableDefaultMaxLength />
               <input type="hidden" value="_self" {...register(`${basePath}.aCard[${index}].eTarget`)} />
             </Col>

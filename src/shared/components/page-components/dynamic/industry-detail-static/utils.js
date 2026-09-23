@@ -80,6 +80,7 @@ export function getDefaultLeadershipCard() {
     oPopupImg: getDefaultImage(),
     sName: '',
     sRole: '',
+    sDescription: '',
     sRedirectUrl: '',
     eTarget: '_self'
   }

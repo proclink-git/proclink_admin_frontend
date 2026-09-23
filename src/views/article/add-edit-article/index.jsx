@@ -163,6 +163,7 @@ function normalizeLeadershipCard(value = {}) {
     oPopupImg: normalizeImage(value?.oPopupImg),
     sName: value?.sName || '',
     sRole: value?.sRole || '',
+    sDescription: value?.sDescription || '',
     sRedirectUrl: value?.sRedirectUrl || '',
     eTarget: value?.eTarget || '_self'
   }
